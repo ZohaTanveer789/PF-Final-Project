@@ -183,6 +183,34 @@ int main(){
         else if (mood=="Hype"){
             // Code for hype mood
         }
+        else if (mood=="Workout")
+        {
+            // Code for workout mood
+        }
+        else if (mood=="Study")
+        {
+            // Code for study mood
+        }
+        else if (mood=="Travel")
+        {
+            // Code for travel mood
+        }
+        else if (mood=="Rainy")
+        {
+            // Code for rainy mood
+        }
+        else if (mood=="Sunny")
+        {
+            // Code for sunny mood
+        }
+        else if (mood=="Snowy")
+        {
+            // Code for snowy mood
+        }
+        else if (mood=="Windy")
+        {
+            // Code for mellow mood
+        }
         else
         {
             cout<<"Invalid mood entered. Please try again."<<endl;
