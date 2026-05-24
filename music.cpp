@@ -4,7 +4,7 @@
 using namespace std;
 int main(){
     int choice=0;
-    string mood=0;
+    string mood;
     //Main Menu
     do
     {
