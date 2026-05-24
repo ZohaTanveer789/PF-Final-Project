@@ -2,41 +2,9 @@
 #include<string>
 #include<fstream>
 using namespace std;
-int main(){
-    int choice=0;
-    string mood;
-    int age=0;
-    //Main Menu
-    do
-    {
-       cout<<"------------------------------"<<endl;
-       cout<<"Music Recommender"<<endl;
-       cout<<"1- Enter Mood"<<endl;
-       cout<<"2- View Mood History"<<endl;
-       cout<<"3- View Playlist History"<<endl;
-       cout<<"4-Exit"<<endl; 
-        cout<<"Enter your choice: ";
-        cin>>choice;
-       cout<<"------------------------------"<<endl;
- 
-    } while (choice >= 1 && choice <= 4); 
-     // Input validation for main menu choice
-    if (choice >4 && choice<1)
-    {
-        cout<<"Invalid choice. Please try again."<<endl;
-        return 0;
-    }
-    
-
-    if (choice==1)                  //Mood Selection
-    {
-        cout<<"------------------------------"<<endl;
-        cout<<"Music Recommender"<<endl;
-        cout<<"Enter your age. So, we can recommend you the best music according to your age."<<endl;
-        cin>>age;
-        cout<<"Enter mood: ";
-        cin>>mood;
-        if(mood=="Happy")
+ int musicrecommender(string mood)  //Music Recommender Function
+ {
+    if(mood=="Happy")
         {
             // Code for happy mood
         }
@@ -209,12 +177,53 @@ int main(){
         }
         else if (mood=="Windy")
         {
-            // Code for mellow mood
+            // Code for windy mood
+        }
+        else if (mood=="nostalgic")
+        {
+            // Code for nostalgic mood
         }
         else
         {
             cout<<"Invalid mood entered. Please try again."<<endl;
         }
+ }
+int main(){
+    int choice=0;
+    string mood;
+    int age=0;
+    //Main Menu
+    do
+    {
+       cout<<"------------------------------"<<endl;
+       cout<<"Music Recommender"<<endl;
+       cout<<"1- Enter Mood"<<endl;
+       cout<<"2- View Mood History"<<endl;
+       cout<<"3- View Playlist History"<<endl;
+       cout<<"4-Exit"<<endl; 
+        cout<<"Enter your choice: ";
+        cin>>choice;
+       cout<<"------------------------------"<<endl;
+ 
+    } while (choice >= 1 && choice <= 4); 
+     // Input validation for main menu choice
+    if (choice >4 && choice<1)
+    {
+        cout<<"Invalid choice. Please try again."<<endl;
+        return 0;
+    }
+    
+
+    if (choice==1)                  //Mood Selection
+    {
+        cout<<"------------------------------"<<endl;
+        cout<<"Music Recommender"<<endl;
+        cout<<"Enter your age. So, we can recommend you the best music according to your age."<<endl;
+        cin>>age;
+        cout<<"Enter mood: ";
+        cin>>mood;
+        musicrecommender(mood);//Function call for music recommender
+        
     }
     
 }
