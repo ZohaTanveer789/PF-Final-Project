@@ -14,6 +14,8 @@ int main(){
        cout<<"2- View Mood History"<<endl;
        cout<<"3- View Playlist History"<<endl;
        cout<<"4-Exit"<<endl; 
+        cout<<"Enter your choice: ";
+        cin>>choice;
        cout<<"------------------------------"<<endl;
  
     } while (choice >= 1 && choice <= 4); 
