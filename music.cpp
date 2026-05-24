@@ -5,6 +5,7 @@ using namespace std;
 int main(){
     int choice=0;
     string mood;
+    int age=0;
     //Main Menu
     do
     {
@@ -29,7 +30,11 @@ int main(){
 
     if (choice==1)                  //Mood Selection
     {
-        cout<<"Enter mood";
+        cout<<"------------------------------"<<endl;
+        cout<<"Music Recommender"<<endl;
+        cout<<"Enter your age. So, we can recommend you the best music according to your age."<<endl;
+        cin>>age;
+        cout<<"Enter mood: ";
         cin>>mood;
         if(mood=="Happy")
         {
@@ -55,7 +60,129 @@ int main(){
         {
             // Code for angry mood
         }
-
+        else if (mood=="nostalgic")
+        {
+            // Code for nostalgic mood
+        }
+        else if (mood=="calm")
+        {
+            // Code for calm mood
+        }
+        else if (mood=="motivated")
+        {
+            // Code for motivated mood
+        }
+        else if (mood=="melancholic")
+        {
+            // Code for melancholic mood
+        }
+        else if (mood=="depressed")
+        {
+            // Code for depressed mood
+        }
+        else if (mood=="anxious")
+        {
+            // Code for anxious mood
+        }
+        else if (mood=="bored")
+        {
+            // Code for bored mood
+        }
+        else if (mood=="upbeat")
+        {
+            // Code for upbeat mood
+        }
+        else if (mood=="peaceful")
+        {
+            // Code for peaceful mood
+        }
+        else if (mood=="sentimental")
+        {
+            // Code for sentimental mood
+        }
+        else if (mood=="hopeful")
+        {
+            // Code for hopeful mood
+        }
+        else if (mood=="lonely")
+        {
+            // Code for lonely mood
+        }
+        else if (mood=="confident")
+        {
+            // Code for confident mood
+        }
+       else if (mood=="gloomy")
+        {
+            // Code for gloomy mood
+        }
+        else if (mood=="excited")
+        {
+            // Code for excited mood
+        }
+        else if (mood=="curious")
+        {
+            // Code for curious mood
+        }
+        else if (mood=="grateful")
+        {
+            // Code for grateful mood
+        }
+        else if (mood=="frustrated")
+        {
+            // Code for frustrated mood
+        }
+        else if (mood=="Love")
+        {
+            // Code for hopeful mood
+        }
+        else if (mood=="Cheerful")
+        {
+            // Code for cheerful mood
+        }
+        else if (mood=="chill")
+        {
+            // Code for chill mood
+        }
+        else if (mood=="Sleepy")
+        {
+            // Code for sleepy mood
+        }
+        else if (mood=="Adventurous")
+        {
+            // Code for adventurous mood
+        }
+        else if (mood=="Reflective")
+        {
+            // Code for reflective mood
+        }
+        else if (mood=="Playful")
+        {
+            // Code for playful mood
+        }
+        else if(mood=="Serene")
+        {
+            // Code for serene mood
+        }
+        else if (mood=="Festive")
+        {
+            // Code for festive mood
+        }
+        else if (mood=="Euphoric")
+        {
+            // Code for euphoric mood
+        }
+        else if (mood=="Party")
+        {
+            // Code for party mood
+        }
+        else if (mood=="Aggressive")
+        {
+            // Code for aggressive mood
+        }
+        else if (mood=="Hype"){
+            // Code for hype mood
+        }
         else
         {
             cout<<"Invalid mood entered. Please try again."<<endl;
