@@ -5,7 +5,7 @@ using namespace std;
     
     string language;
     string type;
-     void saveMood(string mood);
+    void saveMood(string mood);
     void showMoodHistory();
     void showPlaylistHistory();
     void saveFeedback();
@@ -18,7 +18,7 @@ using namespace std;
 int main(){
     int choice=0;
     
-string mood;
+    string mood;
     
     //Main Menu
     
@@ -29,7 +29,7 @@ string mood;
        cout<<"2- View Mood History"<<endl;
        cout<<"3- View Playlist History"<<endl;
        cout<<"4-Exit"<<endl; 
-        cout<<"Enter your choice: ";
+       cout<<"Enter your choice: "<<endl;
         cin>>choice;
        cout<<"------------------------------"<<endl;
        if (choice >=4 || choice<=1)
@@ -46,38 +46,38 @@ string mood;
 }
         cout<<"Enter your prefered song type:90s or recently released :";
         cin>>type;
-        if(mood=="Happy")
+        if(mood=="Happy"||mood=="happy"||mood=="HAPPY"||mood=="Cheerful"||mood=="cheerful"||mood=="CHEERFUL")
         { saveMood(mood);
             happyMood();
         }
-        else if(mood=="Sad")
+        else if(mood=="Sad"||mood=="sad"||mood=="SAD")
         {
             sad();
             saveMood( mood);
         }
-        else if(mood=="Energetic")
+        else if(mood=="Energetic"||mood=="energetic"||mood=="ENERGETIC")
         {
             saveMood( mood);
              energeticMood();
             
                   
         }
-        else if(mood=="Romantic")
+        else if(mood=="Romantic"||mood=="romantic"||mood=="ROMANTIC")
         {
             saveMood( mood);
              romanticMood();
         }
-         else if (mood=="Angry")
+         else if (mood=="Angry"||mood=="angry"||mood=="ANGRY")
         {
             saveMood(mood);
              angryMood();
         }
-        else if(mood=="Relaxed")
+        else if(mood=="Relaxed"||mood=="relaxed"||mood=="RELAXED")
         {
             relaxedMood();
             saveMood( mood);
         }
-        else if (mood=="angry")
+        else if (mood=="angry"||mood=="Angry"||mood=="ANGRY")
         {
             saveMood(mood);
              angryMood();
@@ -86,7 +86,8 @@ string mood;
         else
         {
             cout<<"Invalid mood entered. Please try again."<<endl;
-        }}
+        }
+    }
     
     else if (choice==2)             //View Mood History
     {
@@ -102,9 +103,9 @@ string mood;
         return 0;
     }
     cout<<"Do you want to give feedback? (y/n)";
-    char feedbackChoice;
+    string feedbackChoice;
     cin>>feedbackChoice;
-    if (feedbackChoice=='y' || feedbackChoice=='Y')
+    if (feedbackChoice=="y" || feedbackChoice=="Y"|| feedbackChoice=="yes" || feedbackChoice=="Yes")
     {
         saveFeedback();
     }
@@ -122,9 +123,10 @@ void happyMood() {
     
             // Code for happy mood
             cout<<"You are in a happy mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
+            cout<<"Enter your preferred language: "<<endl;
             cin>>language;
             
-            if(language=="English")
+            if(language=="English"||language=="english"||language=="ENGLISH")
             {
     
 
@@ -142,7 +144,7 @@ void happyMood() {
                     cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
                 }
             }
-            else if (language=="Hindi")
+            else if (language=="Hindi"||language=="hindi"||language=="HINDI")
             {
                 // Code for cheerful mood in Hindi
                 cout<<"You are in a cheerful mood! Here are some song recommendations for you:";
@@ -200,7 +202,7 @@ void happyMood() {
                         cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
                     }
                 }
-                else if (language=="Hindi")
+                else if (language=="Hindi"||language=="hindi"||language=="HINDI")
                 {
                     // Code for sad mood in Hindi
                     cout<<"You are in a sad mood! Here are some song recommendations for you:";
@@ -208,7 +210,7 @@ void happyMood() {
                     {
                         // Code for sad mood in Hindi (90s)
                     }
-                    else if (type=="recently released")
+                    else if (type=="recently released"||type=="Recently Released"||type=="RECENTLY RELEASED"||type=="recentlyreleased"||type=="Recentlyreleased"||type=="RECENTLYRELEASED")
                     {
                         // Code for sad mood in Hindi (recently released)
                     }
@@ -247,7 +249,7 @@ void happyMood() {
                     {
                         // Code for energetic mood in English (90s)
                     }
-                    else if (type=="recently released")
+                    else if (type=="recently released"||type=="Recently Released"||type=="RECENTLY RELEASED"||type=="recentlyreleased"||type=="Recentlyreleased"||type=="RECENTLYRELEASED")
                     {
                         // Code for energetic mood in English (recently released)
                     }
@@ -255,6 +257,7 @@ void happyMood() {
                     {
                         cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
                     }
+                    
                 }
                 else if (language=="Hindi")
                 {
