@@ -5,20 +5,18 @@ using namespace std;
     
     string language;
     string type;
+    string getMoodFile(string mood);
+    void suggestSongs(string mood);
     void saveMood(string mood);
     void showMoodHistory();
     void showPlaylistHistory();
     void saveFeedback();
-    void happyMood();
-    void sad();
-    void energeticMood();
-    void relaxedMood();
-    void romanticMood();
-    void angryMood();
 int main(){
+    while(true)
+    {
     int choice=0;
     
-    string mood;
+string mood;
     
     //Main Menu
     
@@ -29,69 +27,34 @@ int main(){
        cout<<"2- View Mood History"<<endl;
        cout<<"3- View Playlist History"<<endl;
        cout<<"4-Exit"<<endl; 
-       cout<<"Enter your choice: "<<endl;
+        cout<<"Enter your choice: ";
         cin>>choice;
        cout<<"------------------------------"<<endl;
-       if (choice >=4 || choice<=1)
+       if (choice <=4 && choice>=1)
    {
     
 
     if (choice==1)                  //Mood Selection
     {
-        cout<<"Enter mood-Happy, Sad, Energetic, Romantic, Angry, Relaxed: ";
-        cin>>mood;
-        for(char &c : mood)
-{
-    c = tolower(c);
+        if(choice==1){
+    cout << "=====================================\n";
+    cout << "      WELCOME TO MUSIC WORLD\n";
+    cout << "=====================================\n";
+    suggestSongs(mood);
+    cout << "\n\nEnjoy Your Music!\n";
+
 }
-        cout<<"Enter your prefered song type:90s or recently released :";
-        cin>>type;
-        if(mood=="Happy"||mood=="happy"||mood=="HAPPY"||mood=="Cheerful"||mood=="cheerful"||mood=="CHEERFUL")
-        { saveMood(mood);
-            happyMood();
-        }
-        else if(mood=="Sad"||mood=="sad"||mood=="SAD")
-        {
-            sad();
-            saveMood( mood);
-        }
-        else if(mood=="Energetic"||mood=="energetic"||mood=="ENERGETIC")
-        {
-            saveMood( mood);
-             energeticMood();
-            
-                  
-        }
-        else if(mood=="Romantic"||mood=="romantic"||mood=="ROMANTIC")
-        {
-            saveMood( mood);
-             romanticMood();
-        }
-         else if (mood=="Angry"||mood=="angry"||mood=="ANGRY")
-        {
-            saveMood(mood);
-             angryMood();
-        }
-        else if(mood=="Relaxed"||mood=="relaxed"||mood=="RELAXED")
-        {
-            relaxedMood();
-            saveMood( mood);
-        }
-        else if (mood=="angry"||mood=="Angry"||mood=="ANGRY")
-        {
-            saveMood(mood);
-             angryMood();
-        }
 
         else
         {
             cout<<"Invalid mood entered. Please try again."<<endl;
         }
-    }
+    }   
     
     else if (choice==2)             //View Mood History
     {
-         showMoodHistory();
+       
+        showMoodHistory();
     }
     else if (choice==3)             //View Playlist History
     {
@@ -102,10 +65,10 @@ int main(){
         cout<<"Exiting program. Goodbye!"<<endl;
         return 0;
     }
-    cout<<"Do you want to give feedback? (y/n)";
-    string feedbackChoice;
+    cout<<"\nDo you want to give feedback? (y/n)";
+    char feedbackChoice;
     cin>>feedbackChoice;
-    if (feedbackChoice=="y" || feedbackChoice=="Y"|| feedbackChoice=="yes" || feedbackChoice=="Yes")
+    if (feedbackChoice=='y' || feedbackChoice=='Y')
     {
         saveFeedback();
     }
@@ -118,334 +81,186 @@ else
     {
         cout<<"Invalid choice! Please try again."<<endl;
     }
-}
-void happyMood() {
     
-            // Code for happy mood
-            cout<<"You are in a happy mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
-            cout<<"Enter your preferred language: "<<endl;
-            cin>>language;
-            
-            if(language=="English"||language=="english"||language=="ENGLISH")
-            {
+}}
+void suggestSongs(string mood){
     
+    string  language, type, line;
+cout << "\n=====================================\n";
+    cout << "       SONG RECOMMENDATION SYSTEM\n";
+    cout << "=====================================\n";
+    cout << "\nEnter Your Mood: ";
+    cin >> mood;
+    ofstream fout("mood_history.txt", ios::app); //Writing the moods on te file
+    fout << mood << endl;
+    fout.close();
+    // lowercase conversion
+    for(int i = 0; i < mood.length(); i++)
+    {
+        mood[i] = tolower(mood[i]);
+    }
 
-                cout<<"You are in a cheerful mood! Here are some song recommendations for you:";
-                if(type=="90s")
-                {
-                    // Code for cheerful mood in English (90s)
-                }
-                else if (type=="recently released")
-                {
-                    // Code for cheerful mood in English (recently released)
-                }
-                else
-                {
-                    cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                }
-            }
-            else if (language=="Hindi"||language=="hindi"||language=="HINDI")
+    // moods.txt se actual file name lena
+    mood = getMoodFile(mood);
+
+    string filename = mood + ".txt";
+
+    ifstream file(filename);
+
+    if(!file)
+    {
+        cout << "\nMood file not found!\n";
+        return;
+    }
+
+    cout << "\nChoose Language:\n";
+    cout << "hindi\nenglish\nrandom\n";
+
+    cout << "\nEnter Language: ";
+    cin >> language;
+
+    cout << "\nChoose Type:\n";
+    cout << "90s\nrecent\n";
+
+    cout << "\nEnter Type: ";
+    cin >> type;
+
+    // lowercase conversion language
+    for(int i = 0; i < language.length(); i++)
+    {
+        language[i] = tolower(language[i]);
+    }
+
+    // lowercase conversion type
+    for(int i = 0; i < type.length(); i++)
+    {
+        type[i] = tolower(type[i]);
+    }
+
+    string search = language + " " + type;
+
+    bool found = false;
+
+    while(getline(file, line))
+    {
+        if(line == search)
+        {
+            found = true;
+
+            // quote line
+            getline(file, line);
+
+            cout << "\n====================================\n";
+            cout << line << endl;
+            cout << "====================================\n";
+
+            cout << "\nRecommended Songs:\n\n";
+
+            // 3 songs show
+            ofstream playlistFile("playlist.txt", ios::app); // add this
+
+for(int i = 0; i < 3; i++)
+{
+    if(getline(file, line))
+    {
+        cout << i + 1 << ". " << line << endl;
+        playlistFile << line << endl; // save song
+    }
+}
+
+playlistFile.close(); // close file
+            break;
+        }
+    }
+
+    if(!found)
+    {
+        cout << "\nNo songs found for this category.\n";
+    }
+
+    file.close();
+
+}
+string getMoodFile(string mood)
+{
+    ifstream file("moods.txt");
+if(!file)
+{
+    cout << "moods.txt NOT OPENED!" << endl;
+    return mood;
+}
+
+    string line;
+
+    while(getline(file, line))
+    {
+        string key = "";
+        string value = "";
+        bool foundEqual = false;
+
+        for(int i = 0; i < line.length(); i++)
+        {
+            if(line[i] == '=')
             {
-                // Code for cheerful mood in Hindi
-                cout<<"You are in a cheerful mood! Here are some song recommendations for you:";
-                if(type=="90s")
-                {
-                    // Code for cheerful mood in Hindi (90s)
-                }
-                else if (type=="recently released")
-                {
-                    // Code for cheerful mood in Hindi (recently released)
-                }
-                else
-                {
-                    cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                }
+                foundEqual = true;
+                continue;
+            }
+
+            // space ignore کرو
+            if(line[i] == ' ')
+            {
+                continue;
+            }
+
+            if(foundEqual == false)
+            {
+                key += line[i];
             }
             else
             {
-                //Enter random songs for cheerful mood
-                cout<<"You are in a cheerful mood! Here are some song recommendations for you:";
-                if(type=="90s")
-                {
-                    // Code for cheerful mood with random songs (90s)
-                }
-                else if (type=="recently released")
-                {
-                    // Code for cheerful mood with random songs (recently released)
-                }
-                else
-                {
-                    cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                }
-
-            } 
+                value += line[i];
+            }
         }
-        void sad()
+
+        if(key == mood)
         {
-            // Code for sad mood
-            cout<<"You are in a sad mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
-                if(language=="English")
-                {
-                    // Code for sad mood in English
-                    
-                    cout<<"You are in a sad mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for sad mood in English (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for sad mood in English (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else if (language=="Hindi"||language=="hindi"||language=="HINDI")
-                {
-                    // Code for sad mood in Hindi
-                    cout<<"You are in a sad mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for sad mood in Hindi (90s)
-                    }
-                    else if (type=="recently released"||type=="Recently Released"||type=="RECENTLY RELEASED"||type=="recentlyreleased"||type=="Recentlyreleased"||type=="RECENTLYRELEASED")
-                    {
-                        // Code for sad mood in Hindi (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else
-                {
-                    //Enter random songs for sad mood
-                    cout<<"You are in a sad mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for sad mood with random songs (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for sad mood with random songs (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-
-             
+            file.close();
+            return value;
         }
-        void energeticMood()
-        { cout<<"You are in an energetic mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
-            // Code for energetic mood
-                if(language=="English")
-                {
-                    cout<<"You are in an energetic mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for energetic mood in English (90s)
-                    }
-                    else if (type=="recently released"||type=="Recently Released"||type=="RECENTLY RELEASED"||type=="recentlyreleased"||type=="Recentlyreleased"||type=="RECENTLYRELEASED")
-                    {
-                        // Code for energetic mood in English (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                    
-                }
-                else if (language=="Hindi")
-                {
-                    // Code for energetic mood in Hindi
-                    cout<<"You are in an energetic mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for energetic mood in Hindi (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for energetic mood in Hindi (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else
-                {
-                    //Enter random songs for energetic mood
-                    cout<<"You are in an energetic mood! Here are some song recommendations for you:";
-                }
-            
-        }
-        void relaxedMood()
-        {
-            cout<<"You are in a relaxed mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
-            // Code for relaxed mood
-                if(language=="English")
-                {
-                    // Code for relaxed mood in English
-                    cout<<"You are in a relaxed mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for relaxed mood in English (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for relaxed mood in English (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
+    }
 
-                    }
-                }
-                else if (language=="Hindi")
-                {
-                    // Code for relaxed mood in Hindi
-                    cout<<"You are in a relaxed mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for relaxed mood in Hindi (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for relaxed mood in Hindi (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else
-                {
-                    //Enter random songs for relaxed mood
-                    cout<<"You are in a relaxed mood! Here are some song recommendations for you:";
-                }}
-                void romanticMood()
-        {   if(language=="English")
-                {
-                    // Code for romantic mood in English
-                    cout<<"You are in a romantic mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for romantic mood in English (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for romantic mood in English (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else if (language=="Hindi")
-                {
-                    // Code for romantic mood in Hindi
-                    cout<<"You are in a romantic mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for romantic mood in Hindi (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for romantic mood in Hindi (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else
-                {
-                    //Enter random songs for romantic mood
-                    cout<<"You are in a romantic mood! Here are some song recommendations for you:";
-                }
-                 
-        }
-        void angryMood()
-        {
-            cout<<"You are in an angry mood! Here are some language options for you:\nEnglish\nHindi\nRandom"<<endl;
-            // Code for angry mood
-
-                if(language=="English")
-                {
-                    // Code for angry mood in English
-                    cout<<"You are in an angry mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for angry mood in English (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for angry mood in English (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }   
-                }
-                else if (language=="Hindi")
-                {
-                    // Code for angry mood in Hindi
-                    cout<<"You are in an angry mood! Here are some song recommendations for you:";
-                    if(type=="90s")
-                    {
-                        // Code for angry mood in Hindi (90s)
-                    }
-                    else if (type=="recently released")
-                    {
-                        // Code for angry mood in Hindi (recently released)
-                    }
-                    else
-                    {
-                        cout<<"Invalid song type. Please choose either '90s' or 'recently released'.";
-                    }
-                }
-                else
-                {
-                    //Enter random songs for angry mood
-                    cout<<"You are in an angry mood! Here are some song recommendations for you:";
-                }
-            }   
-
-
- 
-
-     // Input validation for main menu choic
-    
-void saveMood(string mood) {
-    ofstream file("mood_history.txt", ios::app);
-    file << mood << endl;
     file.close();
+    return mood;
+
 }
-
-
 void showMoodHistory() {
 
     cout << "\nMood History:\n";
-    ifstream file("mood_history.txt");
+    
+    ifstream fin("mood_history.txt");
     string mood;
-    while (getline(file, mood)) {
+    while (getline(fin, mood)) {
         cout << "- " << mood << endl;
     }
-    file.close();
+    fin.close();
 }
 
 void showPlaylistHistory() {
     ifstream file("playlist.txt");
     string line;
 
-    cout << "\nPlaylist History:\n";
-    while (getline(file, line)) {
-        cout << line << endl;
+    if(!file)
+    {
+        cout << "No playlist history found!\n";
+        return;
     }
+
+    cout << "\nPlaylist History:\n";
+    
+    while (getline(file, line)) {
+        cout << "- " << line << endl;
+    }
+
     file.close();
 }
 
